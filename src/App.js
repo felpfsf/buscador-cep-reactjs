@@ -97,8 +97,8 @@ function App() {
       {Object.keys(cep).length > 0 && (
         <main className="main">
           <h2>CEP: {cep.cep}</h2>
-          <span>Logradouro: {cep.logradouro}</span>
-          <span>Complemento: {cep.complemento}</span>
+          <span>{cep.logradouro}</span>
+          <span>{cep.complemento}</span>
           <span>Bairro: {cep.bairro}</span>
           <span>
             Cidade: {cep.localidade} - UF: {cep.uf}
