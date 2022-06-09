@@ -9,16 +9,15 @@ import './styles.css'
 
 // Função Principal
 function App() {
-
   /*
    * useState para capturar os dados do input
    * input irá armazenar o valor, setInput fará as alterações e useState('') inicia o input sem valor
-   */ 
+   */
   const [input, setInput] = useState('')
 
   /**
    * useState para capturar os dados da api
-   * cep pega os valores do json da api que a variável setCep recebeu na função; 
+   * cep pega os valores do json da api que a variável setCep recebeu na função;
    * o useState({}) está iniciando as variáveis sem nenhum valor pq ainda não foi digitado nenhum CEP
    */
   const [cep, setCep] = useState({})
@@ -35,15 +34,15 @@ function App() {
 
     /**
      * Função Try/Catch para tratamento de erros
-     * 
+     *
      * No bloco try é declarado a constante response que vai receber da api as dados
      *        api.get(`${input}/json`)
      * Aqui é adicionado os dados do input e o /json que é um requerimento do viacep para funcionar corretamente
-     * 
-     * Após isso o setCep armazena o conteúdo de response.data, 
-     * o data é do json gerado pela api, onde se encontra os dados
+     *
+     * Após isso o setCep armazena o conteúdo de response.data,
+     * o data é do json gerado pela api, onde se encontra os dados necessários para a consulta do cep
      * Após o êxito da consulta o campo de texto é limpo passando um valor em branco para setInput
-     * 
+     *
      * No bloco catch é alertado ao usuário, de forma bem genérica, um erro durante a consulta
      * normalmente causado por dados incorretos, e então limpa o campo de input
      */
@@ -51,7 +50,7 @@ function App() {
       const response = await api.get(`${input}/json`)
       setCep(response.data)
       setInput('')
-      console.log(response.data)
+      // console.log(response.data)
     } catch {
       alert('Oops...erro ao buscar CEP')
       setInput('')
@@ -92,7 +91,7 @@ function App() {
           "ddd": "11",
           "siafi": "7107"
 
-          Então após a função handleSearch capturar os dados e armazenar em cep, basta escolher a chave de cada propriedade
+          Então após a função handleSearch capturar os dados e armazenar em cep, basta escolher a propriedade respectiva
           Como Logradouro para Rua, UF para Estado, localidade para Cidade e Bairro para Bairro
       */}
       {Object.keys(cep).length > 0 && (
@@ -101,8 +100,9 @@ function App() {
           <span>Logradouro: {cep.logradouro}</span>
           <span>Complemento: {cep.complemento}</span>
           <span>Bairro: {cep.bairro}</span>
-          <span>Cidade: {cep.localidade}</span>
-          <span>UF: {cep.uf}</span>
+          <span>
+            Cidade: {cep.localidade} - UF: {cep.uf}
+          </span>
         </main>
       )}
     </div>
